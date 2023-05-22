@@ -1,0 +1,63 @@
+{% extends 'core/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block css%}
+
+
+{% endblock %}
+{% block contenido %}
+
+<div class="container bootstrap snippets bootdey">
+  <div class="row">
+    <!-- left column -->
+
+    <!-- edit form column -->
+    <div class="col-md-12 personal-info">
+
+      <h1>Editar Perfil</h1>
+
+      <form method="post">
+        {% csrf_token %}
+        {{ form | crispy }}
+
+        <div class="text-center mt-4">
+          <button type="submit" class="btn btn-dar btn-lg">Editar Perfil</button>
+        </div>
+      </form>
+
+      <div class="text-center mt-4">
+
+          <button onclick="eliminarPerfil()" class="btn btn-danger">Eliminar Perfil</button>
+
+      </div>
+
+
+      <div class="text-center mt-4">
+        {% if suscriptor.es_suscriptor %}
+        <form method="post" action="{% url 'cancelar_suscripcion' %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger btn-lg">Cancelar Suscripción</button>
+        </form>
+        <h3 class="mt-4">Tu cuenta está suscrita. Se ha aplicado un descuento del 5% en tu última donación. Esta será cobrada mensualmente.</h3>
+        <h3>Descuento actual: {{ suscriptor.descuento }}%</h3>
+
+
+      {% endif %}
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+     
+        
+         
+  
+
+
+
+{% endblock %}
